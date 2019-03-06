@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Select_AccountController">
+   <children>
+      <Label layoutX="28.0" layoutY="14.0" text="Select the account you wish to use:">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <ListView fx:id="lstAccounts" layoutX="28.0" layoutY="63.0" prefHeight="149.0" prefWidth="402.0" />
+      <Button fx:id="btnSelect" layoutX="129.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#clickedSelect" prefHeight="55.0" prefWidth="201.0" text="Select" textAlignment="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

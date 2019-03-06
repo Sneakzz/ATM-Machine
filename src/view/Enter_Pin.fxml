@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Enter_PinController">
+   <children>
+      <Label layoutX="71.0" layoutY="22.0" text="Please enter your pin:">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtPin" layoutX="101.0" layoutY="94.0" />
+      <Button fx:id="btnSubmit" layoutX="125.0" layoutY="164.0" mnemonicParsing="false" onMouseClicked="#clickedSubmit" prefHeight="38.0" prefWidth="139.0" text="Submit">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

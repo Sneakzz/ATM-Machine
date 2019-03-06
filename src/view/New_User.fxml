@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.New_UserController">
+   <children>
+      <Label layoutX="155.0" layoutY="22.0" text="Create new user">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="85.0" text="Last name:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="137.0" text="First name:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="187.0" prefHeight="30.0" prefWidth="94.0" text="Birthdate:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="65.0" layoutY="234.0" text="PIN:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtLastName" layoutX="178.0" layoutY="84.0" />
+      <TextField fx:id="txtFirstName" layoutX="178.0" layoutY="136.0" />
+      <PasswordField fx:id="txtPin" layoutX="178.0" layoutY="234.0" />
+      <DatePicker fx:id="Birthdate" layoutX="178.0" layoutY="186.0" prefHeight="31.0" prefWidth="187.0" />
+      <Button fx:id="btnSubmit" layoutX="178.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#clickedSubmit" prefHeight="38.0" prefWidth="139.0" text="Submit">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Label layoutX="60.0" layoutY="280.0" text="Type:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="radioNormal" layoutX="178.0" layoutY="280.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" selected="true" text="Normal">
+         <toggleGroup>
+            <ToggleGroup fx:id="accountType" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="radioSavings" layoutX="279.0" layoutY="280.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="94.0" text="Savings" toggleGroup="$accountType" />
+      <Label layoutX="373.0" layoutY="89.0" text="2 - 25 characters">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="373.0" layoutY="143.0" text="2 - 25 characters">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="373.0" layoutY="193.0" text="16 or older">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="373.0" layoutY="241.0" text="4 digit pin">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ATM_MachineController">
+   <children>
+      <AnchorPane layoutX="43.0" layoutY="105.0" prefHeight="414.0" prefWidth="471.0" style="-fx-background-color: white; -fx-border-color: lightgray;">
+         <children>
+            <Button fx:id="btnCheckBalance" layoutX="14.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#clickedInteraction" prefHeight="119.0" prefWidth="159.0" text="Check Balance" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDepositCash" layoutX="298.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#clickedInteraction" prefHeight="119.0" prefWidth="159.0" text="Deposit Cash" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnWithdrawCash" contentDisplay="BOTTOM" layoutX="298.0" layoutY="227.0" mnemonicParsing="false" onMouseClicked="#clickedInteraction" prefHeight="119.0" prefWidth="159.0" text="Withdraw Cash" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Label fx:id="lblPay" layoutX="14.0" layoutY="227.0" prefHeight="119.0" prefWidth="159.0">
+               <graphic>
+                  <Button fx:id="btnPay" mnemonicParsing="false" onMouseClicked="#clickedInteraction" prefHeight="119.0" prefWidth="159.0" text="Pay" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Button>
+               </graphic>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ListView fx:id="lstUsers" layoutX="550.0" layoutY="105.0" prefHeight="414.0" prefWidth="241.0" />
+      <Label layoutX="169.0" layoutY="41.0" text="ATM Machine">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="627.0" layoutY="41.0" text="Users">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnCardInOut" layoutX="136.0" layoutY="539.0" mnemonicParsing="false" onMouseClicked="#clickedInOutCard" prefHeight="53.0" prefWidth="284.0" text="Insert Card" textAlignment="CENTER">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="550.0" layoutY="539.0" mnemonicParsing="false" onMouseClicked="#clickedNewUser" prefHeight="60.0" prefWidth="241.0" text="New User">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <MenuBar layoutY="-2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Options">
+            <items>
+              <MenuItem fx:id="removeUser" mnemonicParsing="false" onAction="#clickedOptionsMenu" text="Remove User" />
+                  <MenuItem fx:id="modifyUser" mnemonicParsing="false" onAction="#clickedOptionsMenu" text="Modify User" />
+                  <MenuItem fx:id="modifyAccounts" mnemonicParsing="false" onAction="#clickedOptionsMenu" text="Modify Accounts" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#clickedOptionsMenu" text="Exit" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
