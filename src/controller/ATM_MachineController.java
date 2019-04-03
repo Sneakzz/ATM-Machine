@@ -65,7 +65,7 @@ public class ATM_MachineController implements Initializable {
         try {
             AtmMachine.initUsers();
             lstUsers.setItems(AtmMachine.getListOfUsers());
-            System.out.println("Gui users list updated after initializing users! \r\n");
+            //System.out.println("Gui users list updated after initializing users! \r\n");
         } catch (SQLException e) {
             System.out.println("Something went wrong initializing users from the database on startup! \r\n");
             System.out.println(e.getMessage());
@@ -90,18 +90,18 @@ public class ATM_MachineController implements Initializable {
                 case "btnDepositCash":
                     // to make a deposit we also have to open another screen first to get additional info
                     // this could also be done using a JOptionPane but doesn't look as elegant..
-                    System.out.println("Opening deposit screen....\r\n");
+                    //System.out.println("Opening deposit screen....\r\n");
                     Main.displayDepositScreen(AtmMachine, AtmMachine.getInsertedAccount());
                     break;
                 case "btnWithdrawCash":
                     // this action is handled the same way as depositing
-                    System.out.println("Opening withdraw screen....\r\n");
+                    //System.out.println("Opening withdraw screen....\r\n");
                     Main.displayWithdrawScreen(AtmMachine, AtmMachine.getInsertedAccount());
                     break;
                 case "btnPay":
                     // to make a payment we have to open another screen before the actual payment
                     // can be handled. this is necessary because addition we need addition information.
-                    System.out.println("Opening payment screen....\r\n");
+                    //System.out.println("Opening payment screen....\r\n");
                     Main.displayPaymentScreen(AtmMachine, AtmMachine.getInsertedAccount());
                     break;
             }
@@ -116,7 +116,7 @@ public class ATM_MachineController implements Initializable {
             if (lstUsers.getSelectionModel().getSelectedIndex() > -1) {
                 // if there is a user selected we get that user
                 selectedUser = (User) lstUsers.getSelectionModel().getSelectedItem();
-                System.out.println("this is the selected user: " + selectedUser);
+                //System.out.println("this is the selected user: " + selectedUser);
 
                 // open the screen where the user can select the account to use
                 Main.displaySelectAccountScreen(AtmMachine, selectedUser.getAccounts());
@@ -145,7 +145,7 @@ public class ATM_MachineController implements Initializable {
 
         // update the gui list in case a new user is added
         lstUsers.setItems(AtmMachine.getListOfUsers());
-        System.out.println("Gui users list updated after creating a new user! \r\n");
+        //System.out.println("Gui users list updated after creating a new user! \r\n");
     }
 
     @FXML
@@ -159,14 +159,14 @@ public class ATM_MachineController implements Initializable {
                 if (lstUsers.getSelectionModel().getSelectedIndex() > -1) {
                     // if a user is selected, we get that user
                     User selectedUser = (User) lstUsers.getSelectionModel().getSelectedItem();
-                    System.out.println("this is the selected user: " + selectedUser + "\r\n");
+                    //System.out.println("this is the selected user: " + selectedUser + "\r\n");
 
                     // we set the current user in the atm machine
                     AtmMachine.setCurrentUser(selectedUser);
-                    System.out.println("AtmMachine current user is now: " + selectedUser + "\r\n");
+                    //System.out.println("AtmMachine current user is now: " + selectedUser + "\r\n");
 
                     // after that we can open the screen to modify this user
-                    System.out.println("Opening the Modify User screen.... \r\n");
+                    //System.out.println("Opening the Modify User screen.... \r\n");
                     Main.displayModifyUserScreen(AtmMachine);
                 } else {
                     JOptionPane.showMessageDialog(null, "Please select a user from the list first.");
@@ -176,7 +176,7 @@ public class ATM_MachineController implements Initializable {
                 if (lstUsers.getSelectionModel().getSelectedIndex() > -1) {
                     // if there is a user selected we get that user
                     User selectedUser = (User) lstUsers.getSelectionModel().getSelectedItem();
-                    System.out.println("this is the selected user: " + selectedUser);
+                    //System.out.println("this is the selected user: " + selectedUser);
                     
                     // prompt if the user is sure the account can be removed
                     int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this user? \r\nNote that this action will also remove all accounts and CANNOT be undone!", "Warning", JOptionPane.YES_NO_OPTION);
@@ -195,14 +195,14 @@ public class ATM_MachineController implements Initializable {
                 if (lstUsers.getSelectionModel().getSelectedIndex() > -1) {
                     // if there is a user selected we get that user
                     User selectedUser = (User) lstUsers.getSelectionModel().getSelectedItem();
-                    System.out.println("this is the selected user: " + selectedUser);
+                    //System.out.println("this is the selected user: " + selectedUser);
                     
                     // we set the current user in the atm machine
                     AtmMachine.setCurrentUser(selectedUser);
-                    System.out.println("AtmMachine current user is now: " + selectedUser + "\r\n");
+                    //System.out.println("AtmMachine current user is now: " + selectedUser + "\r\n");
 
                     // after that we can open the screen to modify an account for the user
-                    System.out.println("Opening the Modify Accounts screen.... \r\n");
+                    //System.out.println("Opening the Modify Accounts screen.... \r\n");
                     Main.displayModifyAccountsScreen(AtmMachine);
 
                 } else {
@@ -222,10 +222,10 @@ public class ATM_MachineController implements Initializable {
             // first of all if a card is inserted we change the button text to reflect the possibility of withdrawing it
             btnCardInOut.setText("Withdraw Card");
 
-            System.out.println("Checking the account type... \r\n");
+            //System.out.println("Checking the account type... \r\n");
             // if there is an account present, get its type
             String currentAccountType = AtmMachine.getInsertedAccount().getType();
-            System.out.println("inserted account type: " + currentAccountType + "\r\n");
+            //System.out.println("inserted account type: " + currentAccountType + "\r\n");
 
             // switch case statement to handle the different card types
             switch (currentAccountType) {

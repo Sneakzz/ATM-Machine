@@ -25,3 +25,6 @@ More information can be found inside Atm_Machine_Project.pdf
 4) In the source files, update the database connectivity code in the DbProperties.java file. (found in the package "db")
 
 5) Build and run!
+
+## Picture of the main screen
+![image](https://user-images.githubusercontent.com/32787307/55508584-7e72aa00-565a-11e9-8a30-6f0fc509a36a.png)

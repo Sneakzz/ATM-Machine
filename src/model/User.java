@@ -61,8 +61,12 @@ public class User {
         
     }
     
+    public void removeAccount(Account account) {
+        this.accounts.remove(account);
+    }
+    
     private void generateAccount(int pin, String type) {
-        System.out.println("Creating chosen account... \r\n");
+        //System.out.println("Creating chosen account... \r\n");
 
         // initialize the number of accounts the user has
         int amountOfNormalAccounts = 0;
@@ -82,9 +86,9 @@ public class User {
             // we can increase this number to allow more or less of the same account
             if (amountOfNormalAccounts < 1) {
                 NormalAccount newNormalAccount = new NormalAccount(pin, type, this.firstName, this.lastName);
-                System.out.println("Account created! \r\n");
-                System.out.println("new account: \r\n " + newNormalAccount);
-                System.out.println("new account type: " + newNormalAccount.type);
+                //System.out.println("Account created! \r\n");
+                //System.out.println("new account: \r\n " + newNormalAccount);
+                //System.out.println("new account type: " + newNormalAccount.type);
                 
                 // next we add the account to the list
                 addNewAccountToList(newNormalAccount);
@@ -96,9 +100,9 @@ public class User {
             // if the user chose savings we also check if there is no savings account in existence yet
             if (amountOfSavingsAccounts < 1) {
                 SavingsAccount newSavingsAccount = new SavingsAccount(pin, type, this.firstName, this.lastName);
-                System.out.println("Account created!");
-                System.out.println("new account: " + newSavingsAccount);
-                System.out.println("new account type: " + newSavingsAccount.type);
+                //System.out.println("Account created!");
+                //System.out.println("new account: " + newSavingsAccount);
+                //System.out.println("new account type: " + newSavingsAccount.type);
                 
                 // next we add the account to the list
                 addNewAccountToList(newSavingsAccount);
@@ -110,9 +114,9 @@ public class User {
     }
     
     private void addNewAccountToList(Account account) {
-        System.out.println("Adding new account to the list...");
+        //System.out.println("Adding new account to the list...");
         this.accounts.add(account);
-        System.out.println("Account added to the list");
+        //System.out.println("Account added to the list");
     }
 
     public String getLastName() {

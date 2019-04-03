@@ -25,7 +25,7 @@ public class Dao {
     public Boolean checkUser(String firstName, String lastName, LocalDate chosenDate) throws SQLException {
         String query = "SELECT firstname, lastname, birthdate FROM users WHERE firstname = ? AND lastname = ? AND birthdate = ?";
 
-        System.out.println("checkUser query: " + query);
+        //System.out.println("checkUser query: " + query);
 
         try {
             // set up connection
@@ -59,7 +59,7 @@ public class Dao {
     public void insertUser(User newUser) {
         String query = "INSERT INTO users (firstname, lastname, birthdate) VALUES (?, ?, ?);";
 
-        System.out.println("insertUser query: " + query + "\r\n");
+        //System.out.println("insertUser query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -70,8 +70,8 @@ public class Dao {
             pStatement.setString(3, String.valueOf(newUser.getBirthdate()));
             pStatement.executeUpdate();
             
-            System.out.println("User inserted into database! \r\n");
-            System.out.println("Adding accounts to the database \r\n");
+            //System.out.println("User inserted into database! \r\n");
+            //System.out.println("Adding accounts to the database \r\n");
             insertAccounts(newUser.getAccounts(), newUser);
         } catch (SQLException e) {
             System.out.println("Something went terribly wrong when trying to insert a user into the database.... \r\n");
@@ -86,7 +86,7 @@ public class Dao {
             // build the query to insert into the accounts table
             String query = "INSERT INTO accounts (accountid, userid, accounttype, accountnumber, balance) VALUES (?, ?, ?, ?, ?);";
             
-            System.out.println("The insertAccount query: " + query);
+            //System.out.println("The insertAccount query: " + query);
             
             int userid = getUserId(newUser.getFirstName(), newUser.getLastName(), newUser.getBirthdate());
 
@@ -101,7 +101,7 @@ public class Dao {
                 pStatement.setDouble(5, account.getBalance());
                 pStatement.executeUpdate();
                 
-                System.out.println("Account with id: " + account.getAccountID() + " has been added to the database \r\n");
+                //System.out.println("Account with id: " + account.getAccountID() + " has been added to the database \r\n");
                 // after inserting a particular account to the database we also need to 
                 // insert the authentication for the account
                 insertAuth(account);
@@ -114,7 +114,7 @@ public class Dao {
 
     private void insertAuth(Account account) {
         String query = "INSERT INTO auth (accountid, pin) VALUES (?, ?);";
-        System.out.println("The insertAuth query: " + query);
+        //System.out.println("The insertAuth query: " + query);
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -124,7 +124,7 @@ public class Dao {
             pStatement.setInt(2, account.getPin());
             pStatement.executeUpdate();
             
-            System.out.println("Authentication for account with id: " + account.getAccountID() + " has been added to the database \r\n");
+            //System.out.println("Authentication for account with id: " + account.getAccountID() + " has been added to the database \r\n");
         } catch (SQLException e) {
             System.out.println("Something went wrong when inserting the authentication into the database! \r\n");
             System.out.println(e.getMessage());
@@ -153,13 +153,14 @@ public class Dao {
                 updateAccountId(accountid, newAccountId);
             }
         } else {
-            System.out.println("Userid when trying to change an account's details seems to be -1. \r\n");
+            //System.out.println("Userid when trying to change an account's details seems to be -1. \r\n");
+            System.out.println("error changing user!");
         }
     }
 
     private void updateAccountId(String accountid, String newAccountId) {
         String query = "UPDATE accounts SET accountid = ? WHERE accountid = ?;";
-        System.out.println("updateAccountId query: " + query + "\r\n");
+        //System.out.println("updateAccountId query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -169,7 +170,7 @@ public class Dao {
             pStatement.setString(2, accountid);
             pStatement.executeUpdate();
             
-            System.out.println("accountid has been updated! \r\n");
+            //System.out.println("accountid has been updated! \r\n");
         } catch (SQLException e) {
             System.out.println("Something has gone wrong trying to update the accountid when modifying a user");
             System.out.println(e.getMessage());
@@ -179,7 +180,7 @@ public class Dao {
     private void updateUserDetails(int userid, String newLastName, String newFirstName, LocalDate newBirthdate) {
         String query = "UPDATE users SET firstname = ?, lastname = ?, birthdate = ? WHERE userid = ?;";
 
-        System.out.println("updateUserDetails query: " + query + "\r\n");
+        //System.out.println("updateUserDetails query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -191,7 +192,7 @@ public class Dao {
             pStatement.setInt(4, userid);
             pStatement.executeUpdate();
             
-            System.out.println("User details have been updated! \r\n");
+            //System.out.println("User details have been updated! \r\n");
         } catch (SQLException e) {
             System.out.println("Something has gone wrong trying to update the user details when modifying a user");
             System.out.println(e.getMessage());
@@ -202,7 +203,7 @@ public class Dao {
         ArrayList<String> accountids = new ArrayList<>();
         
         String query = "SELECT accountid FROM accounts WHERE userid = ?;";
-        System.out.println("getAccountIds query: " + query + "\r\n");
+        //System.out.println("getAccountIds query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -211,13 +212,13 @@ public class Dao {
             pStatement.setInt(1, userid);
             rs = pStatement.executeQuery();
             
-            System.out.println("Retrieved accountids for the associated account");
+            //System.out.println("Retrieved accountids for the associated account");
         } catch (SQLException e) {
             System.out.println("Something went wrong trying to get the accountids! \r\n");
         }
 
         if (!rs.isBeforeFirst()) {
-            System.out.println("the resultset with accountids seems to be empty...\r\n");
+            //System.out.println("the resultset with accountids seems to be empty...\r\n");
             return null;
         } else {
             while (rs.next()) {
@@ -231,7 +232,7 @@ public class Dao {
         int userid = -1;
         
         String query = "SELECT userid FROM users WHERE firstname = ? AND lastname = ? AND birthdate = ?;";
-        System.out.println("getUserId query: " + query + "\r\n");
+        //System.out.println("getUserId query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -242,7 +243,7 @@ public class Dao {
             pStatement.setString(3, String.valueOf(birthdate));
             rs = pStatement.executeQuery();
             
-            System.out.println("Successfully retrieved userid! \r\n");
+            //System.out.println("Successfully retrieved userid! \r\n");
         } catch (SQLException e) {
             System.out.println("Something went wrong trying to get the userid for changing user details \r\n");
             System.out.println(e.getMessage());
@@ -250,12 +251,12 @@ public class Dao {
 
         // check if the resultSet is empty or not
         if (!rs.isBeforeFirst()) {
-            System.out.println("there were no userid's found.... \r\n");
+            //System.out.println("there were no userid's found.... \r\n");
             return userid;
         } else {
             while (rs.next()) {
                 userid = rs.getInt(1);
-                System.out.println("the found userid: " + userid + "\r\n");
+                //System.out.println("the found userid: " + userid + "\r\n");
             }
 
             return userid;
@@ -263,10 +264,10 @@ public class Dao {
     }
 
     public Boolean validatePin(Account selectedAccount, int answer) throws SQLException {
-        System.out.println("Validating Pin....... \r\n");
+        //System.out.println("Validating Pin....... \r\n");
 
         String query = "SELECT pin FROM auth WHERE accountid = ?;";
-        System.out.println("the validatePin query: " + query + "\r\n");
+        //System.out.println("the validatePin query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -286,7 +287,7 @@ public class Dao {
             System.out.println("Something has gone wrong, pin doesn't seem to exist... \r\n");
         } else {
             while (rs.next()) {
-                System.out.println("Pin found: " + rs.getInt(1) + "\r\n");
+                //System.out.println("Pin found: " + rs.getInt(1) + "\r\n");
                 pin = rs.getInt(1);
             }
         }
@@ -300,7 +301,7 @@ public class Dao {
 
     public Boolean changePin(Account selectedAccount, int newPin) {
         String query = "UPDATE auth SET pin = ? WHERE accountid = ?;";
-        System.out.println("changePin query: " + query + "\r\n");
+        //System.out.println("changePin query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -310,7 +311,7 @@ public class Dao {
             pStatement.setString(2, selectedAccount.getAccountID());
             pStatement.executeUpdate();
             
-            System.out.println("pin has been changed to " + newPin + "for account with accountid: " + selectedAccount.getAccountID() + "\r\n");
+            //System.out.println("pin has been changed to " + newPin + "for account with accountid: " + selectedAccount.getAccountID() + "\r\n");
             return true;
         } catch (SQLException e) {
             System.out.println("Something has gone wrong trying to change the pin \r\n");
@@ -322,9 +323,9 @@ public class Dao {
     public ResultSet getUsers() {
         String query = "SELECT lastname, firstname, birthdate FROM users;";
         
-        System.out.println("getUsers query: " + query + "\r\n");
+        //System.out.println("getUsers query: " + query + "\r\n");
 
-        System.out.println("Trying to get all users from the database....\r\n");
+        //System.out.println("Trying to get all users from the database....\r\n");
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
             
@@ -350,9 +351,9 @@ public class Dao {
                 + "JOIN accounts a on u.userid = a.userid "
                 + "JOIN auth au on a.accountid = au.accountid;";
         
-        System.out.println("getAccounts query: " + query + "\r\n");
+        //System.out.println("getAccounts query: " + query + "\r\n");
 
-        System.out.println("Trying to get all accounts from the database....\r\n");
+        //System.out.println("Trying to get all accounts from the database....\r\n");
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
             
@@ -375,7 +376,7 @@ public class Dao {
     public double getAccountBalance(String accountID) throws SQLException {
         String query = "SELECT balance FROM accounts WHERE accountid = ?;";
 
-        System.out.println("getAccountBalance query: " + query + "\r\n");
+        //System.out.println("getAccountBalance query: " + query + "\r\n");
         
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -398,7 +399,7 @@ public class Dao {
 
     public Boolean accountIdExists(String accountID) throws SQLException {
         String query = "SELECT accountid FROM accounts WHERE accountid = ?;";
-        System.out.println("accountIdExists query: " + query);
+        //System.out.println("accountIdExists query: " + query);
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -417,7 +418,7 @@ public class Dao {
             return false;
         } else {
             while (rs.next()) {
-                System.out.println("the accountID that was found: " + rs.getNString(1) + "\r\n");
+                //System.out.println("the accountID that was found: " + rs.getNString(1) + "\r\n");
             }
             return true;
         }
@@ -427,7 +428,7 @@ public class Dao {
         double newBalance = new BigDecimal((originalBalance - amount)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
         String query = "UPDATE accounts SET balance = ? WHERE accountid = ?;";
-        System.out.println("remove balance query: " + query + "\r\n");
+        //System.out.println("remove balance query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -437,7 +438,7 @@ public class Dao {
             pStatement.setString(2, accountID);
             pStatement.executeUpdate();
             
-            System.out.println("balance has been changed from " + originalBalance + " to " + newBalance + "\r\n");
+            //System.out.println("balance has been changed from " + originalBalance + " to " + newBalance + "\r\n");
         } catch (SQLException e) {
             System.out.println("Something has gone wrong trying to withdraw from the account balance \r\n");
             System.out.println(e.getMessage());
@@ -448,7 +449,7 @@ public class Dao {
         double newBalance = new BigDecimal((originalBalance + amount)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
         String query = "UPDATE accounts SET balance = ? WHERE accountid = ?;";
-        System.out.println("add balance query: " + query + "\r\n");
+        //System.out.println("add balance query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -458,7 +459,7 @@ public class Dao {
             pStatement.setString(2, accountID);
             pStatement.executeUpdate();
             
-            System.out.println("Balance has been changed from " + originalBalance + " to " + newBalance + "\r\n");
+            //System.out.println("Balance has been changed from " + originalBalance + " to " + newBalance + "\r\n");
         } catch (SQLException e) {
             System.out.println("Something has gone wrong trying to add to the account balance \r\n");
             System.out.println(e.getMessage());
@@ -470,7 +471,7 @@ public class Dao {
         double newBalance = new BigDecimal(calculation).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
         String query = "UPDATE accounts SET balance = ? WHERE accountid = ?;";
-        System.out.println("updateSavingsBalance query: " + query + "\r\n");
+        //System.out.println("updateSavingsBalance query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -480,7 +481,7 @@ public class Dao {
             pStatement.setString(2, accountId);
             pStatement.executeUpdate();
             
-            System.out.println("Balance updated from: " + currentBalance + " to: " + newBalance + "\r\n");
+            //System.out.println("Balance updated from: " + currentBalance + " to: " + newBalance + "\r\n");
         } catch (SQLException e) {
             System.out.println("Something went wrong trying to update the balance! \r\n");
             System.out.println(e.getMessage());
@@ -491,16 +492,16 @@ public class Dao {
         String query = "SELECT accountid, balance FROM accounts "
                 + "WHERE accounttype = 'savings' ;";
         
-        System.out.println("getSavingsAccounts query: " + query);
+        //System.out.println("getSavingsAccounts query: " + query);
 
         try {
-            System.out.println("fetching accountid and balance for savings accounts...\r\n");
+            //System.out.println("fetching accountid and balance for savings accounts...\r\n");
             connection = DbSingleton.getDbSingleton().getConnection();
             
             pStatement = connection.prepareStatement(query);
             rs = pStatement.executeQuery();
             
-            System.out.println("successfully executed query for fetching savings accounts");
+           // System.out.println("successfully executed query for fetching savings accounts");
         } catch (SQLException e) {
             System.out.println("Something went wrong trying to get the savings accounts from the database \r\n");
             System.out.println(e.getMessage());
@@ -509,7 +510,7 @@ public class Dao {
         if (!rs.isBeforeFirst()) {
             return null;
         } else {
-            System.out.println("Savings accounts were found! \r\n");
+            //System.out.println("Savings accounts were found! \r\n");
             return rs;
         }
     }
@@ -524,12 +525,12 @@ public class Dao {
         // to finish, insert a new row into the auth table with needed details
         insertAuth(newAccount);
 
-        System.out.println("newly created account successfully added to the database! \r\n");
+        //System.out.println("newly created account successfully added to the database! \r\n");
     }
 
     private void insertAccount(int userid, Account newAccount) {
         String query = "INSERT INTO accounts (accountid, userid, accounttype, accountnumber, balance) VALUES (?, ?, ?, ?, ?);";
-        System.out.println("insertAccount query: " + query + "\r\n");
+        //System.out.println("insertAccount query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -542,7 +543,7 @@ public class Dao {
             pStatement.setDouble(5, newAccount.getBalance());
             pStatement.executeUpdate();
             
-            System.out.println("New account was added to the accounts table \r\n");
+            //System.out.println("New account was added to the accounts table \r\n");
         } catch (SQLException e) {
             System.out.println("Something went wrong trying to add a new account to the accounts table! \r\n");
             System.out.println(e.getMessage());
@@ -551,7 +552,7 @@ public class Dao {
 
     public Boolean removeAccount(Account selectedAccount) {
         String query = "DELETE FROM accounts WHERE accountid = ?;";
-        System.out.println("removeAccount query: " + query + "\r\n");
+        //System.out.println("removeAccount query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -560,7 +561,7 @@ public class Dao {
             pStatement.setString(1, selectedAccount.getAccountID());
             pStatement.executeUpdate();
             
-            System.out.println("account successfully removed! \r\n");
+            //System.out.println("account successfully removed! \r\n");
             return true;
         } catch (SQLException e) {
             System.out.println("Something went wrong trying to remove the account from the database! \r\n");
@@ -573,7 +574,7 @@ public class Dao {
         int userid = getUserId(selectedUser.getFirstName(), selectedUser.getLastName(), selectedUser.getBirthdate());
 
         String query = "DELETE FROM users WHERE userid = ?;";
-        System.out.println("removeUser query: " + query + "\r\n");
+        //System.out.println("removeUser query: " + query + "\r\n");
 
         try {
             connection = DbSingleton.getDbSingleton().getConnection();
@@ -582,7 +583,7 @@ public class Dao {
             pStatement.setInt(1, userid);
             pStatement.executeUpdate();
             
-            System.out.println("User successfully removed! \r\n");
+            //System.out.println("User successfully removed! \r\n");
             return true;
         } catch (SQLException e) {
             System.out.println("Something went wrong trying to remove the user from the database! \r\n");

@@ -89,14 +89,11 @@ public class AtmMachine {
     }
 
     public void newUser(String lastName, String firstName, LocalDate birthdate, int pin, String type) {
-        System.out.println("User is being created... \r\n");
 
         // create the new user
         User newUser = new User(lastName, firstName, birthdate, pin, type);
-        System.out.println("User created! \r\n");
 
         // add the user to the database
-        System.out.println("Adding user to the database... \r\n");
         dao.insertUser(newUser);
 
         // add user to the list of users
@@ -104,9 +101,7 @@ public class AtmMachine {
     }
 
     private void addNewUserToList(User newUser) {
-        System.out.println("Adding user to the list... \r\n");
         listUsers.add(0, newUser);
-        System.out.println("User is added to the list");
 
         // printing the current list
         //System.out.println("This is what the current list now looks like: ");
@@ -123,7 +118,7 @@ public class AtmMachine {
     }
 
     public void modifyUser(String newLastName, String newFirstName, LocalDate newBirthdate) throws SQLException {
-        System.out.println("Changing the details in the database....");
+        //System.out.println("Changing the details in the database....");
         // first make the change in the database
         dao.changeUser(this.currentUser, newLastName, newFirstName, newBirthdate);
         
@@ -150,19 +145,23 @@ public class AtmMachine {
     public void insertCard(Account selectedAccount) {
         // since the user entered the right pin we can accept the "card" or account into the machine
         this.insertedAccount = selectedAccount;
-        System.out.println("Card accepted, welcome! \r\n");
+        //System.out.println("Card accepted, welcome! \r\n");
     }
 
     public void removeCard() {
-        System.out.println("Removing the card from the machine....\r\n");
+        //System.out.println("Removing the card from the machine....\r\n");
         this.insertedAccount = null;
         this.currentUser = null;
-        System.out.println("Card successfully removed! \r\n");
+        //System.out.println("Card successfully removed! \r\n");
+    }
+    
+    public void setInsertedCard(Account account) {
+        this.insertedAccount = account;
     }
 
     public void initUsers() throws SQLException {
         // right now this method assumes the list of users is allready empty because of a program shutdown
-        System.out.println("Trying to initialize existing users and their accounts...\r\n");
+        //System.out.println("Trying to initialize existing users and their accounts...\r\n");
 
         //for initializing the users and their accounts we need two ResultSets
         ResultSet rsUsers = dao.getUsers();
@@ -184,7 +183,7 @@ public class AtmMachine {
                             && rsAccounts.getNString(2).equals(newUser.getFirstName())
                             && rsAccounts.getDate(3).toLocalDate().isEqual(newUser.getBirthdate())) {
                         newUser.addAccount(rsAccounts.getNString(4), rsAccounts.getNString(5), rsAccounts.getNString(6), rsAccounts.getDouble(7), rsAccounts.getInt(8));
-                        System.out.println("Account for user created! \r\n");
+                        //System.out.println("Account for user created! \r\n");
                     }
                 }
                 // move the cursor of the accounts ResultSet back to the front to get ready to do the search for the next user

@@ -64,9 +64,9 @@ public class PayController implements Initializable {
         // so we make sure that it is filled in with a valid user accountID.
         if (validID(txtTo)) {
             // if the entered value is at least the correct length we can use this to check the database if the accountID exists or not.
-            System.out.println("checking if the entered destination accountID exists.... \r\n");
+            //System.out.println("checking if the entered destination accountID exists.... \r\n");
             if (dao.accountIdExists(txtTo.getText())) {
-                System.out.println("account with id: " + txtTo.getText() + " exists! \r\n");
+                //System.out.println("account with id: " + txtTo.getText() + " exists! \r\n");
                 destAccount = getDestAccount(txtTo.getText());
 
                 // now get the chosen amount to pay
@@ -82,18 +82,18 @@ public class PayController implements Initializable {
                     }
 
                     if (amount > 0.00) {
-                        System.out.println("the amount entered: " + amount + " \r\n");
+                        //System.out.println("the amount entered: " + amount + " \r\n");
 
                         // check if the payer has enough balance to make the payment
                         // we use BigDecimal to round the double result to 2 decimal places and still have the result as a double to use
                         double result = new BigDecimal((dao.getAccountBalance(insertedAccount.getAccountID()) - amount)).setScale(2, RoundingMode.HALF_UP).doubleValue();
-                        System.out.println("current balance: " + dao.getAccountBalance(insertedAccount.getAccountID()) + "\r\n"
-                                + "amount to pay: " + amount + "\r\n"
-                                + "amount left over: " + result + "\r\n");
+                        //System.out.println("current balance: " + dao.getAccountBalance(insertedAccount.getAccountID()) + "\r\n"
+                                //+ "amount to pay: " + amount + "\r\n"
+                                //+ "amount left over: " + result + "\r\n");
 
                         Boolean validPayment = (dao.getAccountBalance(insertedAccount.getAccountID()) - amount >= 0.00);
 
-                        System.out.println("valid payment: " + validPayment + "\r\n");
+                        //System.out.println("valid payment: " + validPayment + "\r\n");
                         if (validPayment) {
                             // at this point we can grab the message if there is one
                             if (!txtMessage.getText().isEmpty()) {
@@ -102,7 +102,7 @@ public class PayController implements Initializable {
                             
                             // clear the form for submit
                             clearForSubmit = true;
-                            System.out.println("Payment form cleared for submit! \r\n");
+                            //System.out.println("Payment form cleared for submit! \r\n");
                         } else {
                             JOptionPane.showMessageDialog(null, "It seems you do not have enough balance to make this transaction..");
                         }

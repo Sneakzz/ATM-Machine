@@ -65,7 +65,7 @@ public class DepositController implements Initializable {
 
             // make sure if the given input can be parsed to a double, that the amount is over 0.00
             if (amount > 0.00) {
-                System.out.println("the amount entered: " + amount + " \r\n");
+                //System.out.println("the amount entered: " + amount + " \r\n");
                 
                 // at this point we can clear the form for submit
                 clearForSubmit = true;
@@ -75,7 +75,7 @@ public class DepositController implements Initializable {
             }
             
         } else {
-            System.out.println("no amount to deposit was entered or it was just a dot.. \r\n");
+            //System.out.println("no amount to deposit was entered or it was just a dot.. \r\n");
             JOptionPane.showMessageDialog(null, "Please make sure to enter an amount to deposit in this format: #.##");
         }
         

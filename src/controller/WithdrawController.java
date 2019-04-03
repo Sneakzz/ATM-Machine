@@ -67,22 +67,22 @@ public class WithdrawController implements Initializable {
 
             // make sure if the given input can be parsed to a double, that the amount is over 0.00
             if (amount > 0.00) {
-                System.out.println("the amount entered: " + amount + " \r\n");
+                //System.out.println("the amount entered: " + amount + " \r\n");
 
                 // check if the user has enough balance to make a withdrawal
                 // we use BigDecimal to round the double result to 2 decimal places and still have the result as a double to use
                 double result = new BigDecimal((dao.getAccountBalance(insertedAccount.getAccountID()) - amount)).setScale(2, RoundingMode.HALF_UP).doubleValue();
-                System.out.println("current balance: " + dao.getAccountBalance(insertedAccount.getAccountID()) + "\r\n"
-                        + "amount to withdraw: " + amount + "\r\n"
-                        + "balance left over: " + result + "\r\n");
+                //System.out.println("current balance: " + dao.getAccountBalance(insertedAccount.getAccountID()) + "\r\n"
+                        //+ "amount to withdraw: " + amount + "\r\n"
+                        //+ "balance left over: " + result + "\r\n");
 
                 Boolean validWithdrawal = (dao.getAccountBalance(insertedAccount.getAccountID()) - amount >= 0.00);
 
-                System.out.println("valid withdrawal: " + validWithdrawal + "\r\n");
+                //System.out.println("valid withdrawal: " + validWithdrawal + "\r\n");
                 if (validWithdrawal) {
                     // if the withdrawal is valid we can clear the form for submit
                     clearForSubmit = true;
-                    System.out.println("withdrawal form cleared for submit! \r\n");
+                    //System.out.println("withdrawal form cleared for submit! \r\n");
                 } else {
                     JOptionPane.showMessageDialog(null, "It seems you do not have enough balance to make this withdrawal..");
                 }

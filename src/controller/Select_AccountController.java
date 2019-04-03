@@ -50,7 +50,7 @@ public class Select_AccountController implements Initializable {
         if (lstAccounts.getSelectionModel().getSelectedIndex() > -1) {
             // if an account is selected, we get that account
             Account selectedAccount = (Account) lstAccounts.getSelectionModel().getSelectedItem();
-            System.out.println("this is the selected account: " + selectedAccount);
+            //System.out.println("this is the selected account: " + selectedAccount);
 
             // prompt the screen where the user enters their pin
             Main.displayEnterPinScreen(AtmMachine, selectedAccount);

@@ -93,7 +93,7 @@ public class Modify_UserController implements Initializable {
         }
         
         if(clearForSubmit) {
-            System.out.println("Modify User form is clear for submitting \r\n");
+            //System.out.println("Modify User form is clear for submitting \r\n");
             
             // send all the user information over to be handled by the AtmMachine object
             AtmMachine.modifyUser(newLastName, newFirstName, chosenDate);

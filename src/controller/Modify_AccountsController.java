@@ -118,16 +118,20 @@ public class Modify_AccountsController implements Initializable {
         cmbSelectAccount.getItems().clear();
         ArrayList<Account> accounts = AtmMachine.getCurrentUser().getAccounts();
 
-        cmbSelectAccount.getItems().addAll(accounts);
-        cmbSelectAccount.setValue(accounts.get(0));
+        if (!accounts.isEmpty()) {
+            cmbSelectAccount.getItems().addAll(accounts);
+            cmbSelectAccount.setValue(accounts.get(0));
+        }
     }
 
     private void initModifyAccountPane() {
         cmbSelectModify.getItems().clear();
         ArrayList<Account> accounts = AtmMachine.getCurrentUser().getAccounts();
 
-        cmbSelectModify.getItems().addAll(accounts);
-        cmbSelectModify.setValue(accounts.get(0));
+        if (!accounts.isEmpty()) {
+            cmbSelectModify.getItems().addAll(accounts);
+            cmbSelectModify.setValue(accounts.get(0));
+        }
 
         initPwField(txtOldPin);
         initPwField(txtNewPin);
@@ -154,13 +158,13 @@ public class Modify_AccountsController implements Initializable {
     }
 
     private void handleAddAccount() throws SQLException {
-        System.out.println("submit button clicked for add account pane");
+        //System.out.println("submit button clicked for add account pane");
         Boolean clearForSubmit = false;
         int chosenPin = 0;
 
         // get the type that is chosen
         String chosenType = ((RadioButton) toggleAccountType.getSelectedToggle()).getText().toLowerCase();
-        System.out.println("the chosentype is: " + chosenType + "\r\n");
+        //System.out.println("the chosentype is: " + chosenType + "\r\n");
 
         // get the entered pin
         // first check if the format for the entered pin is correct
@@ -175,7 +179,7 @@ public class Modify_AccountsController implements Initializable {
 
         if (clearForSubmit) {
             // when the form is clear for submitting we have to check if the user can still have an account of the chosen type..
-            System.out.println("the result of the accountClearForCreation method: " + accountClearForCreation(chosenType) + "\r\n");
+            //System.out.println("the result of the accountClearForCreation method: " + accountClearForCreation(chosenType) + "\r\n");
             if (accountClearForCreation(chosenType)) {
                 // when the account is clear for creation we can send over the info so a new account can be made for the user
                 AtmMachine.getCurrentUser().addAccount(chosenType, chosenPin);
@@ -209,19 +213,19 @@ public class Modify_AccountsController implements Initializable {
         switch (chosenType) {
             case "normal":
                 if (amountOfNormalAccounts < 1) {
-                    System.out.println("normal account can be created \r\n");
+                    //System.out.println("normal account can be created \r\n");
                     answer = true;
                 } else {
-                    System.out.println("user allready has a normal type account \r\n");
+                    //System.out.println("user allready has a normal type account \r\n");
                     answer = false;
                 }
                 break;
             case "savings":
                 if (amountOfSavingsAccounts < 1) {
-                    System.out.println("savings account can be created \r\n");
+                    //System.out.println("savings account can be created \r\n");
                     answer = true;
                 } else {
-                    System.out.println("user allready has a savings type account \r\n");
+                    //System.out.println("user allready has a savings type account \r\n");
                     answer = false;
                 }
                 break;
@@ -232,15 +236,20 @@ public class Modify_AccountsController implements Initializable {
     }
 
     private void handleRemoveAccount() throws SQLException {
-        System.out.println("submit button clicked for remove account pane");
+        int choice = -1;
+        //System.out.println("submit button clicked for remove account pane");
 
         // first we need to get the chosen account to remove
         Account selectedAccount = cmbSelectAccount.getSelectionModel().getSelectedItem();
-        System.out.println("this is the selected account for removal: " + selectedAccount + "\r\n");
+        //System.out.println("this is the selected account for removal: " + selectedAccount + "\r\n");
 
-        // make sure the user is sure of the removal of the account. this action CANNOT be undone!
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this account? \r\nNote that this action CANNOT be undone!", "Warning", JOptionPane.YES_NO_OPTION);
-        System.out.println("the value from the choice made: " + choice + "\r\n");
+        if (dao.getAccountBalance(selectedAccount.getAccountID()) > 0.0) {
+            JOptionPane.showMessageDialog(null, "Please withdraw all available balance from the account before removing!");
+        } else {
+            // make sure the user is sure of the removal of the account. this action CANNOT be undone!
+            choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this account? \r\nNote that this action CANNOT be undone!", "Warning", JOptionPane.YES_NO_OPTION);
+            //System.out.println("the value from the choice made: " + choice + "\r\n");
+        }
 
         if (choice == 0) {
             //if the user clicked "yes" on the confirmation dialog the account can be removed
@@ -248,12 +257,17 @@ public class Modify_AccountsController implements Initializable {
 
             // after it is done, inform the user
             if (accountRemoved) {
-                // bug here where the accounts are not correctly removed, this could be fixed by passing through the user to this method and delete the selectedAccount
-                // from the list of accounts that user has.
                 cmbSelectAccount.getItems().remove(selectedAccount);
-                cmbSelectModify.getItems().remove(selectedAccount);
+                this.AtmMachine.getCurrentUser().removeAccount(selectedAccount);
                 JOptionPane.showMessageDialog(null, "Account successfully removed!");
-                // when an account is removed we reset the userlist and reinitialize the panes and so also those comboBoxes
+                
+                this.AtmMachine.removeCard();
+                // check if the user has any accounts left, if not, automatically delete the user as well
+                if (this.AtmMachine.getCurrentUser().getAccounts().isEmpty()) {
+                    this.AtmMachine.removeUser(this.AtmMachine.getCurrentUser());
+                } 
+
+                // when an account and or user is removed we reset the userlist and reinitialize the panes and so also those comboBoxes
                 AtmMachine.resetUserList();
             } else {
                 JOptionPane.showMessageDialog(null, "Account could not be removed!");
@@ -263,11 +277,11 @@ public class Modify_AccountsController implements Initializable {
     }
 
     private void handleModifyAccount() throws SQLException {
-        System.out.println("submit button clicked for modify account pane");
+        //System.out.println("submit button clicked for modify account pane");
 
         // get the selected account
         Account selectedAccount = cmbSelectModify.getSelectionModel().getSelectedItem();
-        System.out.println("this is the selected account for removal: " + selectedAccount + "\r\n");
+        //System.out.println("this is the selected account for removal: " + selectedAccount + "\r\n");
 
         // check for formatting of both the pin numbers
         if (pinFormatCorrect(txtOldPin) && pinFormatCorrect(txtNewPin)) {

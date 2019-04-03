@@ -53,13 +53,13 @@ public class Enter_PinController implements Initializable {
             // if the format of the pin is correct, which means 4 digits have been entered
             // then we can check if the entered pin is correct for the chosen account.
             int answer = Integer.parseInt(txtPin.getText());
-            System.out.println("entered pin: " + answer + "\r\n");
+            //System.out.println("entered pin: " + answer + "\r\n");
             // check in the database if the pin is correct for the chosen account
             Boolean pinCorrect = dao.validatePin(selectedAccount, answer);
-            System.out.println("pinCorrect outcome: " + pinCorrect + "\r\n");
+            //System.out.println("pinCorrect outcome: " + pinCorrect + "\r\n");
 
             if (pinCorrect) {
-                System.out.println("Pin is correct! starting login procedure... \r\n");
+                //System.out.println("Pin is correct! starting login procedure... \r\n");
                 // if the pin is correct we can send over the authenticated account to the atm machine for further processing
                 AtmMachine.insertCard(selectedAccount);
 

@@ -22,17 +22,17 @@ public class SavingsAccount extends Account {
     // static method that handles generating and adding the intrest to savingsAccounts
     static void generateIntrest() throws SQLException {
         Dao dao = new Dao();
-        System.out.println("Generating and adding intrest to savings accounts....\r\n");
+        //System.out.println("Generating and adding intrest to savings accounts....\r\n");
         // get a resultset of all the savings accounts
             ResultSet savingsAccounts = dao.getSavingsAccounts();
             double intrest = 0.01;
 
             // if the resultset is empty we report it and move on
             if(savingsAccounts == null) {
-                System.out.println("There were no savings account found in the database!\r\n");
+                //System.out.println("There were no savings account found in the database!\r\n");
             } else {
                 // for every savings account in the resultset we update the balance accordingly
-                System.out.println("Updating the balance for all savings accounts with intrest... \r\n");
+                //System.out.println("Updating the balance for all savings accounts with intrest... \r\n");
                 while(savingsAccounts.next()) {
                     dao.updateSavingsBalance(savingsAccounts.getNString(1), savingsAccounts.getDouble(2), intrest);
                 }

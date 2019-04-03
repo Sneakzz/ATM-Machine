@@ -46,7 +46,7 @@ public class Account {
     
     public void checkBalance() throws SQLException {
         // when this method is called, we know an account and user are inserted
-        System.out.println("Looking up current balance for accountID: " + this.accountID + "\r\n");
+        //System.out.println("Looking up current balance for accountID: " + this.accountID + "\r\n");
         
         // so at this point we can lookup the balance for the account
         double currentBalance = dao.getAccountBalance(this.accountID);
@@ -56,7 +56,7 @@ public class Account {
     }
     
     public void pay(Account destAccount, Account insertedAccount, double amount) throws SQLException {
-        System.out.println("creating transactions, please wait.... \r\n");
+        //System.out.println("creating transactions, please wait.... \r\n");
         
         // in order to be sure of a correct payment we first get the balance of both accounts involved from the database
         double destBalance = dao.getAccountBalance(destAccount.getAccountID());
@@ -68,38 +68,38 @@ public class Account {
         // add the amount to the receiver balance
         depositTo(amount, destAccount.getAccountID(), destBalance);
         
-        System.out.println("Transactions complete! \r\n");
+        //System.out.println("Transactions complete! \r\n");
     }
     
     public void withdraw(double amount, double originalBalance) {
-        System.out.println("Trying to withdraw from the account...\r\n");
+        //System.out.println("Trying to withdraw from the account...\r\n");
         dao.removeBalance(amount, accountID, originalBalance);
-        System.out.println("Withdraw complete \r\n");
+        //System.out.println("Withdraw complete \r\n");
     }
 
     public void deposit(double amount, double originalBalance) {
-        System.out.println("Trying to deposit to the account...\r\n");
+        //System.out.println("Trying to deposit to the account...\r\n");
         dao.addBalance(amount, accountID, originalBalance);
-        System.out.println("Deposit complete! \r\n");
+        //System.out.println("Deposit complete! \r\n");
     }
     
     private void depositTo(double amount, String accountId, double originalBalance) {
-        System.out.println("Trying to deposit to the destination account....\r\n");
+        //System.out.println("Trying to deposit to the destination account....\r\n");
         dao.addBalance(amount, accountId, originalBalance);
-        System.out.println("Deposit complete! \r\n");
+        //System.out.println("Deposit complete! \r\n");
     }
     
     private String generateAccountNumber() {
         /**
          * TODO!!
          * 
-         * we honestly still need a resultset of all current accountNumbers so when we generate 
+         * This could still use a resultset of all current accountNumbers so when we generate 
          * a new accountNumber we can check it against existing ones and make sure we dont create 
          * any double accountNumbers.
          */
         
         
-        System.out.println("1) Creating the account number");
+        //System.out.println("1) Creating the account number");
         
         Random r = new Random();
         int amountOfNumbers = 10;
@@ -110,8 +110,8 @@ public class Account {
             newNumber = r.nextInt(10);
             newAccountNumber += newNumber;
         }
-        System.out.println("created account number: " + newAccountNumber);
-        System.out.println("Account number creation done! \r\n");
+        //System.out.println("created account number: " + newAccountNumber);
+        //System.out.println("Account number creation done! \r\n");
         return newAccountNumber;
     }
     
@@ -123,7 +123,7 @@ public class Account {
          * where we can loop through and check that the newly generated accountID is unique
          */
         
-        System.out.println("Creating the account ID \r\n");
+        //System.out.println("Creating the account ID \r\n");
         
         String firstInitial = firstName.substring(0, 1);
         String lastInitial = lastName.substring(0, 1);
@@ -131,8 +131,8 @@ public class Account {
         
         String newAccountID = firstInitial + lastInitial + digits;
         
-        System.out.println("the new account ID: " + newAccountID);
-        System.out.println("Account ID created \r\n");
+        //System.out.println("the new account ID: " + newAccountID);
+        //System.out.println("Account ID created \r\n");
         
         return newAccountID;
     }

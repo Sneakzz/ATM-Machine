@@ -10,7 +10,7 @@ package db;
  * @author Kenny
  */
 public class DbProperties {
-    public static final String URL = "jdbc:mysql://127.0.0.1:3306/atm?serverTimezone=UTC";
-    public static final String USERNAME = "root";
-    public static final String PASSWORD = "Adm1234";
+    public static final String URL = "";
+    public static final String USERNAME = "";
+    public static final String PASSWORD = "";
 }

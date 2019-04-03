@@ -120,7 +120,7 @@ public class New_UserController implements Initializable {
 
         // check and make sure the form is clear for submitting
         if (clearForSubmit) {
-            System.out.println("Form clear for submit! \r\n");
+            //System.out.println("Form clear for submit! \r\n");
 
             // send all the user information over to be handled by the AtmMachine object
             AtmMachine.newUser(txtLastName.getText(), txtFirstName.getText(), chosenDate, Integer.parseInt(txtPin.getText()), chosenType);
